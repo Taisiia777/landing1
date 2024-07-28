@@ -13,7 +13,7 @@ export default function Header({ ...props }) {
             </Text>
             <div className="flex gap-4">
               <div className="flex flex-col">
-                <a href="#">
+                <a href="/cart">
                   <Img src="images/img_shopping_cart.svg" alt="Cart Icon" className="h-[24px]" />
                 </a>
               </div>
