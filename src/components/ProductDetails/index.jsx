@@ -1,22 +1,21 @@
 
-
 // import { Button, Text, Img } from "../../components";
 // import React from "react";
 
 // export default function ProductDetails({
-//   productImage = "images/img_mutton_lamb_bir.png",
-//   productName = "Чизкейк Нью Йорк",
-//   productPrice = "260 ₽",
-//   productWeight = "50 грамм",
-//   productDescription = "Классическое блюдо американской кухни, которое прочно вошло в меню кафеек всего мира. Его достаточно просто.",
-//   addToCartButton = "В КОРЗИНУ",
-//   viewDetailsButton = "ПОДРОБНЕЕ",
+//   productImage,
+//   productName,
+//   productPrice,
+//   productWeight,
+//   productDescription,
+//   addToCartButton,
+//   viewDetailsButton,
 //   onViewDetails,
 //   onAddToCart,
 //   ...props
 // }) {
 //   return (
-//     <div {...props} className={`${props.className} flex flex-col w-full gap-6 py-6 sm:py-5 bg-white-a700 shadow-xs rounded-[10px]`}>
+//     <div className={`flex flex-col w-full gap-6 py-6 sm:py-5 bg-white-a700 shadow-xs rounded-[10px] ${props.className}`}>
 //       <div className="flex flex-col gap-3.5 self-stretch">
 //         <Img src={productImage} alt="Dish Image" className="h-[200px] object-cover" />
 //         <div className="flex flex-col gap-1.5">
@@ -55,8 +54,9 @@
 //     </div>
 //   );
 // }
+
 import { Button, Text, Img } from "../../components";
-import React from "react";
+import React, { useState } from "react";
 
 export default function ProductDetails({
   productImage,
@@ -70,10 +70,27 @@ export default function ProductDetails({
   onAddToCart,
   ...props
 }) {
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  const handleAddToCart = () => {
+    setIsAnimating(true);
+    onAddToCart();
+
+    setTimeout(() => {
+      setIsAnimating(false);
+    }, 1000); // Длительность анимации
+  };
+
   return (
-    <div className={`flex flex-col w-full gap-6 py-6 sm:py-5 bg-white-a700 shadow-xs rounded-[10px] ${props.className}`}>
+    <div className={`flex flex-col w-full gap-6 py-6 sm:py-5 bg-white-a700 shadow-xs rounded-[10px] ${props.className} ${isAnimating ? 'fly-image w-[400px]' : ''}`}>
       <div className="flex flex-col gap-3.5 self-stretch">
-        <Img src={productImage} alt="Dish Image" className="h-[200px] object-cover" />
+        <div className="relative">
+          <Img 
+            src={productImage} 
+            alt="Dish Image" 
+            className={`h-[200px] object-cover w-full`}
+          />
+        </div>
         <div className="flex flex-col gap-1.5">
           <div className="flex flex-col items-start">
             <Text size="desktop_h3" as="p" className="!text-gray-900">
@@ -96,7 +113,7 @@ export default function ProductDetails({
       <div className="mx-6 flex flex-col gap-2 self-stretch">
         <Button 
           className="flex h-[48px] flex-row items-center justify-center self-stretch rounded-[10px] bg-red-900 px-[34px] text-center text-[16px] text-white-a700 sm:px-5"
-          onClick={onAddToCart}
+          onClick={handleAddToCart}
         >
           {addToCartButton}
         </Button>
