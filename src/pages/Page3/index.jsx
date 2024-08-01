@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet";
 import Footer from "../../components/Footer";
-import Header from "../../components/Header";
+import Header2 from "../../components/Header2";
 import CartSection from "./CartSection";
 import React from "react";
 
@@ -16,7 +16,7 @@ export default function Page3Page() {
       </Helmet>
       <div className="flex w-full flex-col items-center gap-[50px] bg-white-a700">
         <div className="container-xs mt-[54px] md:p-5">
-          <Header className="md:gap-[68px] sm:gap-[34px]" />
+          <Header2 className="md:gap-[68px] sm:gap-[34px]" />
         </div>
         <div className="flex flex-col gap-[108px] self-stretch md:gap-[81px] sm:gap-[54px]">
           {/* cart section */}

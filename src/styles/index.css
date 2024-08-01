@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
 body {
       margin: 0;
@@ -32,4 +33,34 @@ body {
       outline: none;
     }
     
+    @keyframes fly-to-cart {
+      0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      50% {
+        opacity: 0.5;
+        transform: translateY(-200px) scale(0.5);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-500px) scale(0.2);
+      }
+    }
+    
+    .fly-image {
+      position: absolute;
+      z-index: 1000;
+      animation: fly-to-cart 1s forwards;
+    }
+    .desktop-popup {
+      transform: scale(1.4); /* Масштабирование на десктопах */
+      transform-origin: center center; /* Центрирование трансформации */
+    }
+    
+    @media (max-width: 1024px) {
+      .desktop-popup {
+        transform: none; /* Убираем масштабирование на экранах меньшего размера */
+      }
+    }
     

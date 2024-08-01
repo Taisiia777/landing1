@@ -15,7 +15,9 @@ module.exports = {
           white: { a700: "#ffffff", a700_e5: "#ffffffe5" },
         },
         boxShadow: { xs: "0 4px 9px 0 #887d7d19" },
-        fontFamily: { gerbera: "Gerbera", mont: "Mont", gerberabold: "Gerbera-Bold" },
+        fontFamily: {
+          roboto: ['Roboto', 'sans-serif'], // Добавлен шрифт Roboto
+        },
       },
     },
     plugins: [require("@tailwindcss/forms")],
