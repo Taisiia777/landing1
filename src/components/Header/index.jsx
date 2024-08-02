@@ -1,9 +1,11 @@
 
 
   import { Heading, Text, Img } from "./..";
-  import React from "react";
-
+  import React, { useContext, useState } from "react";
+import { CartContext } from '../../../src/CartContext';
   export default function Header({ ...props }) {
+    const { cartItems, updateQuantity } = useContext(CartContext);
+
     return (
       <header {...props} className={`${props.className} flex flex-col items-start gap-[68px]`}>
         <div className="flex flex-col gap-6 w-full"> {/* Изменено на w-full */}
@@ -13,13 +15,16 @@
               <Text size="desktop_body" as="p" className="whitespace-nowrap"> {/* Добавлено whitespace-nowrap */}
                 +7 (999) 123-45-67
               </Text>
-              <div className="flex gap-4">
+              <div className="flex gap-4" style={{display: 'flex', flexDirection:'row', alignItems: 'center', justifyContent:'center', height:'15px'}}>
+              <div style={{width: '40px', height: '30px', borderRadius: '20px', color:'#B42926', background: '#fff', display: 'flex', flexDirection:'row', alignItems: 'center', justifyContent:'center',}}>
+                  {cartItems.length}
+                </div>
                 <div className="flex flex-col">
                   <a href="/cart">
                     <Img src="images/img_shopping_cart.svg" alt="Cart Icon" className="h-[24px]" />
                   </a>
                 </div>
-                <Text size="desktop_body" as="p" className="whitespace-nowrap"> {/* Добавлено whitespace-nowrap */}
+                <Text size="desktop_body" as="p" className="whitespace-nowrap" style={{color: '#fff'}}> {/* Добавлено whitespace-nowrap */}
                   Корзина
                 </Text>
               </div>
