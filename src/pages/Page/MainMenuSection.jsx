@@ -3,6 +3,7 @@
 
 
 
+
 // import React, { useState, useContext } from 'react';
 // import { CloseSVG } from "../../assets/images";
 // import { Button, Input, Img, Heading } from "../../components";
@@ -121,13 +122,14 @@
 //   },
 // ];
 
-
 // export default function MainMenuSection() {
 //   const [searchBarValue, setSearchBarValue] = useState("");
 //   const [isModalOpen, setIsModalOpen] = useState(false);
 //   const [selectedProduct, setSelectedProduct] = useState(null);
+//   const [isAnimating, setIsAnimating] = useState(false); // Состояние для анимации
 //   const { addToCart } = useContext(CartContext);
-//   const { cartItems } = useContext(CartContext); // Получаем cartItems из контекста
+//   const { cartItems } = useContext(CartContext); 
+
 //   const handleViewDetails = (product) => {
 //     setSelectedProduct(product);
 //     setIsModalOpen(true);
@@ -136,6 +138,17 @@
 //   const closeModal = () => {
 //     setIsModalOpen(false);
 //     setSelectedProduct(null);
+//   };
+
+//   const handleAddToCart = (product) => {
+//     if (!isAnimating) {
+//       setIsAnimating(true); // Запуск анимации
+
+//       setTimeout(() => {
+//         addToCart(product);
+//         setIsAnimating(false); // Остановка анимации после добавления в корзину
+//       }, 1000); // Длительность анимации
+//     }
 //   };
 
 //   const filteredProducts = dessertMenuGrid.filter((product) =>
@@ -171,8 +184,8 @@
 //                 key={index} 
 //                 {...product} 
 //                 onViewDetails={() => handleViewDetails(product)} 
-//                 onAddToCart={() => {addToCart(product);   console.log(JSON.stringify(cartItems))
-//                 }} 
+//                 onAddToCart={() => handleAddToCart(product)} 
+//                 isAnimating={isAnimating} // Передача состояния анимации
 //               />
 //             ))}
 //           </div>
@@ -187,130 +200,12 @@
 
 
 
-
-
-
-
-
-
-
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { CloseSVG } from "../../assets/images";
 import { Button, Input, Img, Heading } from "../../components";
 import ProductDetails from "../../components/ProductDetails";
 import Page2 from "../../modals/Page2";
 import { CartContext } from '../../CartContext'; // Импортируем CartContext
-
-const dessertMenuGrid = [
-  {
-    productImage: "images/img_mutton_lamb_bir.png",
-    productName: "Чизкейк Нью Йорк",
-    productPrice: "260 р",
-    productWeight: "50 грамм",
-    productDescription: "классическое блюдо американской кухни, которое прочно вошло в меню кафешек всего мира. Его достаточно просто.",
-    addToCartButton: "В КОРЗИНУ",
-    viewDetailsButton: "ПОДРОБНЕЕ",
-  },
-  {
-    productImage: "images/img_mutton_lamb_bir_200x252.png",
-    productName: "Торт Брауни",
-    productPrice: "260 р",
-    productWeight: "50 грамм",
-    productDescription: "классическое блюдо американской кухни, которое прочно вошло в меню кафешек всего мира. Его достаточно просто.",
-    addToCartButton: "В КОРЗИНУ",
-    viewDetailsButton: "ПОДРОБНЕЕ",
-  },
-  {
-    productImage: "images/img_mutton_lamb_bir_1.png",
-    productName: "Торт Медовик",
-    productPrice: "260 р",
-    productWeight: "50 грамм",
-    productDescription: "классическое блюдо американской кухни, которое прочно вошло в меню кафешек всего мира. Его достаточно просто.",
-    addToCartButton: "В КОРЗИНУ",
-    viewDetailsButton: "ПОДРОБНЕЕ",
-  },
-  {
-    productImage: "images/img_mutton_lamb_bir_2.png",
-    productName: "Тирамису",
-    productPrice: "260 р",
-    productWeight: "50 грамм",
-    productDescription: "классическое блюдо американской кухни, которое прочно вошло в меню кафешек всего мира. Его достаточно просто.",
-    addToCartButton: "В КОРЗИНУ",
-    viewDetailsButton: "ПОДРОБНЕЕ",
-  },
-  {
-    productImage: "images/img_mutton_lamb_bir_3.png",
-    productName: "Торт Кофейный",
-    productPrice: "260 р",
-    productWeight: "50 грамм",
-    productDescription: "классическое блюдо американской кухни, которое прочно вошло в меню кафешек всего мира. Его достаточно просто.",
-    addToCartButton: "В КОРЗИНУ",
-    viewDetailsButton: "ПОДРОБНЕЕ",
-  },
-  {
-    productImage: "images/img_mutton_lamb_bir_4.png",
-    productName: "Ореховый",
-    productPrice: "260 р",
-    productWeight: "50 грамм",
-    productDescription: "классическое блюдо американской кухни, которое прочно вошло в меню кафешек всего мира. Его достаточно просто.",
-    addToCartButton: "В КОРЗИНУ",
-    viewDetailsButton: "ПОДРОБНЕЕ",
-  },
-  {
-    productImage: "images/img_mutton_lamb_bir_5.png",
-    productName: "Триумфальный",
-    productPrice: "260 р",
-    productWeight: "50 грамм",
-    productDescription: "классическое блюдо американской кухни, которое прочно вошло в меню кафешек всего мира. Его достаточно просто.",
-    addToCartButton: "В КОРЗИНУ",
-    viewDetailsButton: "ПОДРОБНЕЕ",
-  },
-  {
-    productImage: "images/img_mutton_lamb_bir_6.png",
-    productName: "Великолепный",
-    productPrice: "260 р",
-    productWeight: "50 грамм",
-    productDescription: "классическое блюдо американской кухни, которое прочно вошло в меню кафешек всего мира. Его достаточно просто.",
-    addToCartButton: "В КОРЗИНУ",
-    viewDetailsButton: "ПОДРОБНЕЕ",
-  },
-  {
-    productImage: "images/img_mutton_lamb_bir_7.png",
-    productName: "Сладкая любовь",
-    productPrice: "260 р",
-    productWeight: "50 грамм",
-    productDescription: "классическое блюдо американской кухни, которое прочно вошло в меню кафешек всего мира. Его достаточно просто.",
-    addToCartButton: "В КОРЗИНУ",
-    viewDetailsButton: "ПОДРОБНЕЕ",
-  },
-  {
-    productImage: "images/img_mutton_lamb_bir_8.png",
-    productName: "Медовый фул-хаос",
-    productPrice: "260 р",
-    productWeight: "50 грамм",
-    productDescription: "классическое блюдо американской кухни, которое прочно вошло в меню кафешек всего мира. Его достаточно просто.",
-    addToCartButton: "В КОРЗИНУ",
-    viewDetailsButton: "ПОДРОБНЕЕ",
-  },
-  {
-    productImage: "images/img_mutton_lamb_bir_9.png",
-    productName: "Аппетитный",
-    productPrice: "260 р",
-    productWeight: "50 грамм",
-    productDescription: "классическое блюдо американской кухни, которое прочно вошло в меню кафешек всего мира. Его достаточно просто.",
-    addToCartButton: "В КОРЗИНУ",
-    viewDetailsButton: "ПОДРОБНЕЕ",
-  },
-  {
-    productImage: "images/img_mutton_lamb_bir_10.png",
-    productName: "Восторг Василия",
-    productPrice: "260 р",
-    productWeight: "50 грамм",
-    productDescription: "классическое блюдо американской кухни, которое прочно вошло в меню кафешек всего мира. Его достаточно просто.",
-    addToCartButton: "В КОРЗИНУ",
-    viewDetailsButton: "ПОДРОБНЕЕ",
-  },
-];
 
 export default function MainMenuSection() {
   const [searchBarValue, setSearchBarValue] = useState("");
@@ -319,6 +214,32 @@ export default function MainMenuSection() {
   const [isAnimating, setIsAnimating] = useState(false); // Состояние для анимации
   const { addToCart } = useContext(CartContext);
   const { cartItems } = useContext(CartContext); 
+  const [products, setProducts] = useState([]); // Состояние для продуктов
+
+  // Статичные данные, которые будут добавлены к каждому продукту
+  const defaultProductData = {
+    productWeight: "50 грамм",
+    productDescription: "классическое блюдо американской кухни, которое прочно вошло в меню кафешек всего мира. Его достаточно просто.",
+    addToCartButton: "В КОРЗИНУ",
+    viewDetailsButton: "ПОДРОБНЕЕ",
+  };
+
+  // Получение данных с сервера
+  useEffect(() => {
+    fetch('http://localhost:5000/api/products') // Замените URL на ваш
+      .then(response => response.json())
+      .then(data => {
+        // Добавление статичных данных к каждому продукту
+        const updatedProducts = data.map(product => ({
+          ...product,
+          ...defaultProductData,
+          productImage: product.productDescription || "images/default_image.png", // Добавьте стандартное изображение, если отсутствует
+          productPrice: `${product.productPrice} р` // Форматирование цены
+        }));
+        setProducts(updatedProducts);
+      })
+      .catch(error => console.error('Ошибка при загрузке продуктов:', error));
+  }, []);
 
   const handleViewDetails = (product) => {
     setSelectedProduct(product);
@@ -341,7 +262,7 @@ export default function MainMenuSection() {
     }
   };
 
-  const filteredProducts = dessertMenuGrid.filter((product) =>
+  const filteredProducts = products.filter((product) =>
     product.productName.toLowerCase().includes(searchBarValue.toLowerCase())
   );
 

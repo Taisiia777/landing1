@@ -1,12 +1,19 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap'); */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+/* Импорт шрифтов с Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Mont:wght@100..900&family=Gerbera:wght@400;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* Примените шрифт ко всем элементам */
+
+/* Применение шрифта 'Gerbera' ко всему тексту */
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Gerbera', sans-serif;
+}
+
+/* Применение шрифта 'Mont' для заголовков и цифр */
+h1, h2, h3, h4, h5, h6, 
+body {
+  font-family: 'Mont', sans-serif;
 } 
 [type="text"],
 input:where(:not([type])),

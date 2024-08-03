@@ -13,8 +13,7 @@ import { CartContext } from '../../../src/CartContext';
             <Img src="images/img_1_1.svg" alt="Header Logo" className="h-[30px] w-[6%] min-w-[60px] self-center" /> {/* Добавлено min-w для логотипа */}
             <div className="flex justify-between gap-5"> {/* Удалено ограничение ширины */}
               <Text size="desktop_body" as="p" className="whitespace-nowrap"> {/* Добавлено whitespace-nowrap */}
-                +7 (999) 123-45-67
-              </Text>
+              +7 (952) 679-60-22              </Text>
               <div className="flex gap-4" style={{display: 'flex', flexDirection:'row', alignItems: 'center', justifyContent:'center', height:'15px'}}>
               <div style={{width: '40px', height: '30px', borderRadius: '20px', color:'#B42926', background: '#fff', display: 'flex', flexDirection:'row', alignItems: 'center', justifyContent:'center',}}>
                   {cartItems.length}

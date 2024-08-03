@@ -50,7 +50,7 @@ export default function ProductDetails({
   >
     <Img src="images/img_add_circle_outline.svg" alt="Decrement Icon" className="h-[24px] w-[24px]" />
   </div>
-  <Text as="p" className="text-[#B42926] text-[16px]">
+  <Text as="p" className="text-[#B42926] text-[16px]" style={{color:'#B42926'}}>
     {quantity}
   </Text>
   <div

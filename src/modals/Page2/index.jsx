@@ -141,7 +141,7 @@ export default function Page2({ isOpen, onRequestClose, product }) {
         addToCart({ ...product, quantity });
         setIsAnimating(false); // Остановка анимации
         setShowFlyImage(false);
-        onRequestClose(); // Закрытие попапа после добавления в корзину
+        // onRequestClose(); // Закрытие попапа после добавления в корзину
       }, 1000); // Длительность анимации
     }
   };

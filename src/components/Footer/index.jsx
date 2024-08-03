@@ -16,8 +16,7 @@ export default function Footer({ ...props }) {
                 Телефон
               </Text>
               <Text size="desktop_body" as="p">
-                +7 (999) 123-45-67
-              </Text>
+              +7 (952) 679-60-22              </Text>
             </div>
             <div className="flex flex-col items-start">
               <Text size="desktop_body" as="p">
